@@ -10,10 +10,20 @@ const app = express();
 
 const path = require('path');
 
+const hpp = require('hpp');
+
 // Security Middlewares
 app.use(helmet({ contentSecurityPolicy: false })); // Disabled CSP for ease of Vite deployment
-app.use(cors());
+
+// Strict CORS Configuration
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL || '*' : 'http://localhost:5173',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json({ limit: '10kb' })); // Limit body size
+app.use(hpp()); // Protect against HTTP Parameter Pollution
 
 // Rate Limiting to prevent DDoS
 const apiLimiter = rateLimit({

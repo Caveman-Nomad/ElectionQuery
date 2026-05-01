@@ -1,5 +1,14 @@
 const geminiService = require('../services/geminiService');
 
+/**
+ * Handles the incoming chat request from the client.
+ * Validates input, interacts with the Gemini Service, and returns the response.
+ *
+ * @async
+ * @param {import('express').Request} req - The Express request object containing messages and stateContext in the body.
+ * @param {import('express').Response} res - The Express response object used to send back the JSON response.
+ * @returns {Promise<void>} Sends a JSON response with the AI text or an error message.
+ */
 async function handleChat(req, res) {
   try {
     const { messages, stateContext } = req.body;
