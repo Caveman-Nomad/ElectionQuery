@@ -16,7 +16,7 @@ function App() {
   };
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {!locationCtx ? (
         <LocationPicker onComplete={setLocationCtx} />
       ) : (
@@ -26,7 +26,20 @@ function App() {
           toggleTheme={toggleTheme} 
         />
       )}
-    </>
+      
+      {/* Accessibility & India-Centric Footer */}
+      <footer style={{
+        textAlign: 'center',
+        padding: '1rem',
+        fontSize: '0.875rem',
+        backgroundColor: 'var(--bg-secondary)',
+        borderTop: '1px solid var(--border-color)',
+        color: 'var(--text-secondary)'
+      }} role="contentinfo">
+        <p>Need urgent assistance? Call the official Election Commission of India Helpline at <strong>1950</strong>.</p>
+        <p>Visit <a href="https://voters.eci.gov.in" target="_blank" rel="noopener noreferrer" style={{color: 'var(--primary-color)'}} aria-label="Visit the official ECI Voters portal">voters.eci.gov.in</a> for official documentation.</p>
+      </footer>
+    </div>
   );
 }
 

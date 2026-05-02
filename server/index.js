@@ -10,10 +10,21 @@ const app = express();
 
 const path = require('path');
 
+const xss = require('xss-clean');
 const hpp = require('hpp');
 
 // Security Middlewares
-app.use(helmet({ contentSecurityPolicy: false })); // Disabled CSP for ease of Vite deployment
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // Allowed for React/Vite development
+      styleSrc: ["'self'", "'unsafe-inline'"], // Allowed for React inline styles
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://generativelanguage.googleapis.com"]
+    }
+  }
+}));
 
 // Strict CORS Configuration
 app.use(cors({
@@ -23,6 +34,7 @@ app.use(cors({
 }));
 
 app.use(express.json({ limit: '10kb' })); // Limit body size
+app.use(xss()); // Sanitize data against XSS
 app.use(hpp()); // Protect against HTTP Parameter Pollution
 
 // Rate Limiting to prevent DDoS

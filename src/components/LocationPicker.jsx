@@ -11,6 +11,14 @@ const INDIAN_STATES = [
   'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
 ];
 
+/**
+ * Renders an accessible modal overlay for selecting the user's Indian State or UT.
+ * Essential for providing localized election context to the backend.
+ *
+ * @param {Object} props - Component props
+ * @param {Function} props.onComplete - Callback fired when a state is selected and submitted.
+ * @returns {JSX.Element} The Location Picker modal.
+ */
 export default function LocationPicker({ onComplete }) {
   const [state, setState] = useState('');
   const selectRef = useRef(null);

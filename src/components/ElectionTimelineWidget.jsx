@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Renders an accessible timeline widget to display election phases.
+ * Highlights the current phase based on the provided index.
+ *
+ * @param {Object} props - Component props
+ * @param {Array<{title: string, desc: string, date: string}>} props.phases - Election phases to render.
+ * @param {number} props.currentPhaseIdx - The zero-indexed current active phase.
+ * @returns {JSX.Element|null} The timeline section or null if empty.
+ */
 const ElectionTimelineWidget = React.memo(({ phases, currentPhaseIdx }) => {
   if (!phases || phases.length === 0) return null;
 

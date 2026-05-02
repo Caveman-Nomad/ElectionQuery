@@ -25,6 +25,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+/**
+ * Main Chat Interface for the ElectionGuide application.
+ * Manages conversation state, interacts with the backend, and renders widgets.
+ *
+ * @param {Object} props - Component props
+ * @param {Object} props.locationCtx - Location context object containing the selected State/UT.
+ * @param {string} props.theme - Current theme ('light' or 'dark').
+ * @param {Function} props.toggleTheme - Function to toggle the application theme.
+ * @returns {JSX.Element} The chat application interface.
+ */
 export default function ChatInterface({ locationCtx, theme, toggleTheme }) {
   const [messages, setMessages] = useState([
     {
